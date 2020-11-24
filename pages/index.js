@@ -1,65 +1,53 @@
+import * as React from 'react'
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Image from 'next/image'
+import styles from '../styles/Menu.module.css'
 
 export default function Home() {
+  const [isActive, setActive] = React.useState(false)
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+    <div
+      className="h-screen w-screen absolute"
+      style={{
+        backgroundImage: 'url("/home-img.jpg")',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      <div className="flex h-60 z-10 absolute w-screen" style={{ backgroundColor: '#1E1F20' }}>
+        <h1 className="z-20 text-white text-9xl mt-44 ml-20">76 GASTROPUB</h1>
+        <nav className={`nav${isActive ? '' : ' active'}`}>
+          <a href="#" className={styles.nav__link}>Home</a>
+          <a href="#" className={styles.nav__link}>About</a>
+          <a href="#" className={styles.nav__link}>Shop</a>
+          <a href="#" className={styles.nav__link}>Contact</a>
+        </nav>
+        <div className={styles.hamburger} onClick={() => { setActive(!isActive); console.log(isActive); }}>
+          <span className={styles.hamburger__patty}></span>
+          <span className={styles.hamburger__patty}></span>
+          <span className={styles.hamburger__patty}></span>
         </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+      </div>
+      <div></div>
+      <style jsx>{`
+        .nav {
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: center;
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          background: #2b2e4a;
+          clip-path: circle(29px at calc(100% - 5vw - 60px / 2) calc(5vh + 60px / 2));
+          transition: all 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        .nav .active {
+          clip-path: circle(75% at 100% / 2 50vh);
+        }
+      `}</style>
     </div>
   )
 }
